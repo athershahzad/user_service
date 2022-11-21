@@ -1,0 +1,55 @@
+server:
+    port: 8085
+    servlet:
+        context-path: /user_service
+        encoding:
+            force: true
+spring:
+    application:
+        name: user_service
+    batch:
+        job:
+            enabled: false
+    data:
+        jpa:
+            repositories:
+                bootstrap-mode: default
+    datasource:
+        hikari:
+            connection-timeout: ${DATASOURCE_CONNECTION_TIMEOUT:30000}
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 250
+                prepStmtCacheSqlLimit: 2048
+                useServerPreSpStmts: true
+            idleTimeout: ${DATASOURCE_IDLE_TIMOUT:600000}
+            max-lifetime: ${DATASOURCE_MAX_LIFETIME:1800000}
+            maximum-pool-size: ${DATABASE_POOL_SIZE:5}
+        password: root_test
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:mysql://localhost:3306/userservice?createDatabaseIfNotExist=true
+        username: root
+    jackson:
+        serialization:
+            indent-output: true
+    jpa:
+        database: MYSQL
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        hibernate:
+            ddl-auto: none
+        open-in-view: false
+        properties:
+            hibernate:
+                cache:
+                    use_query_cache: false
+                    use_second_level_cache: false
+                generate_statistics: true
+                id:
+                    new_generator_mappings: true
+        show-sql: false
+    liquibase:
+        change-log: classpath:liquibase/master.xml
+    main:
+        allow-bean-definition-overriding: true
+    profiles:
+        active: develop
