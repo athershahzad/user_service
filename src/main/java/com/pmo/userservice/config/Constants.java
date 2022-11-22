@@ -1,4 +1,4 @@
-package com.pmo.config;
+package com.pmo.userservice.config;
 
 /**
  * Application constants.
